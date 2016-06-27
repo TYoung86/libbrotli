@@ -3,7 +3,7 @@ compiler:
   - clang
   - gcc
 install:
-  - make get-deps
+  - true
 script:
   - ./autogen.sh
   - ./configure
