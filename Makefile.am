@@ -3,6 +3,7 @@ AUTOMAKE_OPTIONS = foreign nostdinc subdir-objects
 ACLOCAL_AMFLAGS = -I m4
 
 lib_LTLIBRARIES = libbrotlidec.la libbrotlienc.la
+bin_PROGRAMS = bro
 
 DECODE = brotli/dec/bit_reader.c brotli/dec/decode.c		\
   brotli/dec/huffman.c brotli/dec/state.c 	\
@@ -42,12 +43,13 @@ EXTRA_DIST = AUTHORS README
 nobase_include_HEADERS = $(DECODEHEADERS) $(ENCODEHEADERS)
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = libbrotlienc.pc libbrotlidec.pc
+pkgconfig_DATA = libbrotlienc.pc libbrotlidec.pc bro.pc
 pkgincludedir= $(includedir)/brotli
 pkginclude_HEADERS = 
 
-LIBBROTLIENC_VERSION_INFO = -version-info 1:0:0
-LIBBROTLIDEC_VERSION_INFO = -version-info 1:0:0
+LIBBROTLIENC_VERSION_INFO = -version-info 0:4:0
+LIBBROTLIDEC_VERSION_INFO = -version-info 0:4:0
+
 # This flag accepts an argument of the form current[:revision[:age]]. So,
 # passing -version-info 3:12:1 sets current to 3, revision to 12, and age to
 # 1.
@@ -76,17 +78,27 @@ LIBBROTLIDEC_VERSION_INFO = -version-info 1:0:0
 # set age to 0. (c:r:a=0)
 #
 
+if DEBUG
+AM_CFLAGS = -g3 -O0
+AM_CXXFLAGS = -g3 -O0
+AM_LDFLAGS = -no-undefined
+else
+AM_CFLAGS = -g0 -O2 -mtune=native -flto -fno-omit-frame-pointer -no-canonical-prefixes -Wmissing-prototypes
+AM_CXXFLAGS = -g0 -O2 -mtune=native -flto -fno-omit-frame-pointer -no-canonical-prefixes -Wmissing-declarations
+AM_LDFLAGS = -g0 -Wl,-S -no-undefined -flto
+endif
+
 libbrotlidec_la_CPPFLAGS_EXTRA = -DBROTLI_BUILDING_LIBRARY
 libbrotlidec_la_LDFLAGS = $(AM_LDFLAGS) $(LIBBROTLIDEC_VERSION_INFO) $(LDFLAGS)
 libbrotlidec_la_CFLAGS = $(AM_CFLAGS) $(libbrotli_la_CFLAGS_EXTRA)
-libbrotlidec_la_CXXFLAGS =
+libbrotlidec_la_CXXFLAGS = $(AM_CXXFLAGS) $(libbrotli_la_CXXFLAGS_EXTRA)
 libbrotlidec_la_CPPFLAGS = $(AM_CPPFLAGS) $(libbrotli_la_CPPFLAGS_EXTRA)
 libbrotlidec_la_SOURCES = $(DECODE) $(DECODEHEADERS)
 
 libbrotlienc_la_CPPFLAGS_EXTRA = -DBROTLI_BUILDING_LIBRARY
 libbrotlienc_la_LDFLAGS = $(AM_LDFLAGS) $(LIBBROTLIENC_VERSION_INFO) $(LDFLAGS)
 libbrotlienc_la_CFLAGS = $(AM_CFLAGS) $(libbrotli_la_CFLAGS_EXTRA)
-libbrotlienc_la_CXXFLAGS =
+libbrotlienc_la_CXXFLAGS = $(AM_CXXFLAGS) $(libbrotli_la_CXXFLAGS_EXTRA)
 libbrotlienc_la_CPPFLAGS = $(AM_CPPFLAGS) $(libbrotli_la_CPPFLAGS_EXTRA)
 libbrotlienc_la_SOURCES = $(ENCODE) $(ENCODEHEADERS)
 
@@ -94,6 +106,11 @@ libbrotlienc_la_SOURCES = $(ENCODE) $(ENCODEHEADERS)
 libbrotlienc_ladir = $(includedir)
 libbrotlidec_ladir = $(includedir)
 
-brotli:
-	echo "Install symlink 'brotli' to brotli source code root"
-	exit 1
+bro_CPPFLAGS_EXTRA = -DBROTLI_BUILDING_LIBRARY
+bro_SOURCES = brotli/tools/bro.cc brotli/tools/version.h $(nobase_include_HEADERS)
+bro_LDFLAGS = $(AM_LDFLAGS) $(BRO_VERSION_INFO) $(LDFLAGS)
+bro_CFLAGS = $(AM_CFLAGS) $(bro_CFLAGS_EXTRA)
+bro_CXXFLAGS = $(AM_CXXFLAGS) $(bro_CXXFLAGS_EXTRA)
+bro_CPPFLAGS = $(AM_CPPFLAGS) $(bro_CPPFLAGS_EXTRA)
+bro_LDADD = $(lib_LTLIBRARIES)
+
