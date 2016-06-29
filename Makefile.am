@@ -115,5 +115,5 @@ bro_CPPFLAGS = $(AM_CPPFLAGS) $(bro_CPPFLAGS_EXTRA)
 bro_LDADD = $(lib_LTLIBRARIES)
 
 check:
-	ln -ns -T $(abs_top_builddir)/$(bin_PROGRAMS) $(abs_top_builddir)/brotli/tools/$(bin_PROGRAMS)
+	ln -nsf -T $(abs_top_builddir)/$(bin_PROGRAMS) $(abs_top_builddir)/brotli/tools/$(bin_PROGRAMS)
 	$(MAKE) -C $(abs_top_builddir)/brotli/tests

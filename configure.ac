@@ -1,4 +1,4 @@
-AC_PREREQ(2.69)
+AC_PREREQ(2.68)
 
 AC_INIT([libbrotli], [0.4.0], [-])
 AC_CONFIG_SRCDIR([brotli/dec/decode.h])
