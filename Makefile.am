@@ -107,7 +107,7 @@ libbrotlienc_ladir = $(includedir)
 libbrotlidec_ladir = $(includedir)
 
 bro_CPPFLAGS_EXTRA = -DBROTLI_BUILDING_LIBRARY
-bro_SOURCES = brotli/tools/bro.cc brotli/tools/version.h $(nobase_include_HEADERS)
+bro_SOURCES = brotli/tools/bro.cc brotli/tools/win32_support.h brotli/tools/version.h $(nobase_include_HEADERS)
 bro_LDFLAGS = $(AM_LDFLAGS) $(BRO_VERSION_INFO) $(LDFLAGS)
 bro_CFLAGS = $(AM_CFLAGS) $(bro_CFLAGS_EXTRA)
 bro_CXXFLAGS = $(AM_CXXFLAGS) $(bro_CXXFLAGS_EXTRA)

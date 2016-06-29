@@ -1,3 +1,6 @@
 [submodule "brotli"]
 	path = brotli
-	url = https://github.com/google/brotli
+	url = https://github.com/TYoung86/brotli.git
+	fetchRecurseSubmodules = true
+	branch = v0.4
+
