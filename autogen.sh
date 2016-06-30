@@ -13,7 +13,7 @@ if test $? -ne 0; then
 fi
 
 $GIT submodule init
-$GIT submodule update
+$GIT submodule update --remote
 
 # create m4 before autoreconf
 mkdir m4 2>/dev/null
