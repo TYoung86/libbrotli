@@ -4,8 +4,10 @@ compiler:
   - gcc
 
 script:
-  - ./autogen.sh
-  - ./configure && make && make check
+  - ./autogen.sh &&
+    ./configure &&
+    make &&
+    make check
 
 deploy:
   skip_cleanup: true
