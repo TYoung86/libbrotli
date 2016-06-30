@@ -8,8 +8,7 @@ sudo: false
 script:
   - ./autogen.sh &&
     ./configure &&
-    make &&
-    make check
+    make
 
 deploy:
   skip_cleanup: true
