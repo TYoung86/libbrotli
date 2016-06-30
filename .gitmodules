@@ -1,0 +1,4 @@
+[submodule "brotli"]
+	path = brotli
+	url = https://github.com/TYoung86/brotli.git
+	branch = v0.4
