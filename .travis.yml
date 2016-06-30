@@ -5,12 +5,13 @@ compiler:
 script:
   - ./autogen.sh
   - ./configure
-  - make
+  - make distclean
 deploy:
+  skip_cleanup: true
   provider: releases
   api_key:
     secure: TC8yIrEaQkbYbOxno0haI/cOX4wvIz31ymm3AC+z/WP1bl1DeUQ95FnDmcbTYjKWXcnUdalj90UBCf4WcXEIunxME4bTM+f6NeXiC2dptK4FntPYv5dLBFVBjl5o/Y4PkxgOkmhmwGGKhcpcD6b+1h2wuCLhiE4awysgqbjfN75ZGpwWspqH3peSwJ3cTILgqpp/85nSvviAEz58Zc3t5MiOLOsuClCL0+aOhMEaLNNUzT0yqPRj+9vhvw2GJCQoQ9epsb3u1yoi0ZY/urDmJLtgKIDezauW4Wfqq0Fgt/pYGmcRJ+YIypkZgUgflEbkLt+QbXFS+rfgGoGJQcYFm9mQjkwOeMEPA20YOTJToNWpy0Q8PC/ewII8sRHpSGu94c5+oywYOxeB2/g23KlE+EroBUwRnoBUnJhLLTxj0K8aJxAlrAYKvVcFseIiOjrJyr4kn2EoOjdgWAahuAe2nT/bConc6aZnXVxMi8n3uxq06y1anG71Urlmq5ktA33CHSD98784xLjQb6i6HjmgDv2ToaaTOMQsXtE/i4sEEVfpy5QplhPwBRKhbj82KQnYppgXodiwe8cRM1BoQ7EOmMXKjLGVROwjL41Kt8qHo5pbrLJS71crbiSrWCwEJVuM/lPRjKJEfkWKSA405MiLpq4v5HnJbyj/Dg/chZ3vGLw=
   file: 
-    - ".libs"
+    - "libbrotli-0.4.0"
   on:
     repo: TYoung86/libbrotli
