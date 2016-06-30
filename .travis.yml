@@ -3,6 +3,12 @@ language: cpp
 compiler:
   - gcc
 
+sudo: false
+
+before_script:
+  - apt-get -qq update
+  - apt-get install -qqy autoconf libtool build-essential make
+
 script:
   - ./autogen.sh &&
     ./configure &&
