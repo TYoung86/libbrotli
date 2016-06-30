@@ -116,6 +116,6 @@ bro_LDADD = $(lib_LTLIBRARIES)
 
 check:
 	if [ -d "$(abs_top_builddir)/brotli/tests" ]; then \
-		ln -nsf -T $(abs_top_builddir)/$(bin_PROGRAMS) $(abs_top_builddir)/brotli/tools/$(bin_PROGRAMS) \
+		ln -nsf -T $(abs_top_builddir)/$(bin_PROGRAMS) $(abs_top_builddir)/brotli/tools/$(bin_PROGRAMS); \
 		$(MAKE) -C $(abs_top_builddir)/brotli/tests; \
 	fi
